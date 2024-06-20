@@ -1,0 +1,125 @@
+{% extends "default_page.html"  %}
+
+{% set title = 'Моя страница' %}
+
+{% block content %}
+
+<div class="container" style="text-align: center">
+    <div class="avatar-in-user-page"
+         user_id="{{ page_user.user_id }}">
+        <img src="{% if page_user.avatar_link %}{{ page_user.avatar_link }}
+                  {% else %}/images/default_avatar.jpg {% endif %}"
+             height="200px" width="200px"
+             style="border-radius:50%;">
+    </div>
+    <h1 class="user_nickname">
+        {{ page_user.nickname }}
+    </h1>
+
+    {% if page_user.user_id == user.user_id %}
+        <div>
+            <button type="button"
+                    class="btn btn-light"
+                    onclick="document.location.href='/settings'">
+                Настройки
+            </button>
+            <button type="button"
+                    class="btn btn-outline-danger me-2"
+                    onclick_type="logout"
+                    style="margin-right: 0!important;">
+                Выйти
+            </button>
+        </div>
+    {% else %}
+        <h3 class="last_time_online"
+            user_id="{{ page_user.user_id }}">
+            Был(а) недавно
+        </h3>
+    {% endif %}
+
+    {% set confirmed = [] %}
+    {% set non_confirmed = [] %}
+    {% set requested = [] %}
+
+    {% for friend in user.friends %}
+        {% if friend.confirmed %}
+            {% set confirmed = confirmed.append(friend.friend_id) %}
+        {% elif friend.request %}
+            {% set requested =  requested.append(friend.friend_id) %}
+        {% else %}
+            {% set non_confirmed =  non_confirmed.append(friend.friend_id) %}
+        {% endif %}
+    {% endfor %}
+
+
+    <div class="user-in-people-buttons">
+    {% if user.user_id != page_user.user_id %}
+        <button type="button" class="btn btn-primary me-2 button-in-people-buttons"
+                onclick_type = "connect"
+                friend_id = "{{ page_user.user_id }}">
+            Написать сообщение
+        </button>
+
+        {% if page_user.user_id in confirmed %}
+            <button type="button" class="btn btn-light btn-outline-danger me-2 button-in-people-buttons"
+                    onclick_type = "delete_friend"
+                    friend_id = "{{ page_user.user_id }}">
+                Удалить из друзей
+            </button>
+        {% elif page_user.user_id in requested %}
+            <button type="button" class="btn btn-light btn-outline-success me-2 button-in-people-buttons"
+                    onclick_type = "confirm_friend"
+                    friend_id = "{{ page_user.user_id }}">
+                Принять заявку
+            </button>
+        {% elif page_user.user_id in non_confirmed %}
+            <button type="button" class="btn btn-light btn-outline-danger me-2 button-in-people-buttons"
+                    onclick_type = "cancel_friend"
+                    friend_id = "{{ page_user.user_id }}">
+                Отменить заявку
+            </button>
+        {% else %}
+            <button type="button" class="btn btn-light me-2 button-in-people-buttons"
+                    onclick_type = "add_friend"
+                    friend_id = "{{ page_user.user_id }}">
+                Добавить в друзья
+            </button>
+        {% endif %}
+    {% else %}
+        <button type="button" class="btn btn-dark me-2 button-in-people-buttons"
+                onclick_type = "connect"
+                friend_id = "{{ page_user.user_id }}" self>
+            Написать сообщение себе
+        </button>
+    {% endif %}
+    </div>
+
+    <br><br>
+    <div class="modal-content rounded-4 shadow">
+        <h3 style="word-break: break-all; margin: 18px">{{ page_user.user_id }}</h3>
+    </div>
+</div>
+
+
+{#{% if not page_user.online %}#}
+{#{% if last_time_online %}#}
+{#<script>#}
+{#    request = async () => {#}
+{#        const user_info = await fetch("/api/v1/users/" + "{{ page_user.user_id }}");#}
+{#        const last_time = (await user_info.json()).last_time_online;#}
+{#        await set_online(last_time)#}
+{#    }#}
+{#    window.onload = function () {#}
+{#        request()#}
+{#    }#}
+{#</script>#}
+{#{% else %}}#}
+{#<script>#}
+{#    window.onload = function () {#}
+{#        set_online()#}
+{#    }#}
+{#</script>#}
+{#{% endif %}#}
+{#{% endif %}#}
+
+{% endblock %}

@@ -1,0 +1,2 @@
+class CompanionsMessageError(Exception):
+    pass

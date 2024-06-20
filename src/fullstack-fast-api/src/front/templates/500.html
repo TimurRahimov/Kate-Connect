@@ -1,0 +1,16 @@
+{% extends "default_page.html"  %}
+
+{% set title = 'Серверу плохо :С' %}
+
+{% block content %}
+<div class="container">
+    <br><br><br>
+    <div style="text-align: center">
+        <h1>Внутренняя ошибка сервера!</h1>
+        <br>
+        <h4 class="error-500-message">Вероятнее всего, вскоре Мессенджер будет работать как раньше.</h4>
+<!--        <h4 style="color: gray; font-size: 21px;">Если же вы видите данную страницу продолжительное время, сообщите нам</h4>-->
+        <img class="error-500-gif" src="/images/500.gif" width="500px">
+    </div>
+</div>
+{% endblock %}

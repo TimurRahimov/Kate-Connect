@@ -1,0 +1,56 @@
+{% extends "default_page.html"  %}
+
+{% set title = 'Сообщения' %}
+
+{% block content %}
+   <div id="chat_header" class="rounded-4 shadow user-info-line container">
+       <button id="mobile_return_to_chats" onclick_type="return_to_chats" class="btn me-2 rounded-4 btn-dark {{ show_window }}">
+           Назад
+       </button>
+       <span id="chat_title">
+           {% if _with %} {{ _with }} {% endif %}
+       </span>
+   </div>
+
+    <div style="display: flex; flex-direction: row; padding: 0;" class="container">
+        <div id="chats_window" class="modal-content rounded-4 shadow user-info-line container {{ show_window }}">
+            <img id="chats_loading" src="/images/loading.gif" alt="" width="200" height="150">
+            <img id="chats_loading_boobs" src="/images/loading-boobs.gif" alt="" hidden>
+            <ul id="chats_ul" chat_id="{{ chat["chat_id"] }}">
+
+            </ul>
+        </div>
+        <div id="messages_window" class="modal-content rounded-4 shadow user-info-line container {{ show_window }}">
+            <img id="messages_loading" src="/images/loading.gif" alt="" width="200" height="150" hidden>
+            <ul id="messages_ul" chat_id="{{ chat["chat_id"] }}">
+
+            </ul>
+            <label id="send_message_label" style="display: flex; margin-bottom: 10px; width: 100%;">
+                <textarea class="form-control send_message_input rounded-3" name="input_message"
+                          id="input_message" entity_type="messages"></textarea>
+                <button id="send_message" onclick_type="send_message" chat_id="{{ chat["chat_id"] }}"
+                        type="submit" style="height: 40px">Отправить</button>
+            </label>
+        </div>
+    </div>
+{#<div class="people-finder container">#}
+{#    <label class="people-finder">#}
+{#        <i class="bx bx-search-alt-2 people-finder"></i>#}
+{#        <input class="modal-content rounded-4 shadow people-finder" type="search" entity_type="users">#}
+{#    </label>#}
+{#</div>#}
+{#<div id="kaleidoscope_container">#}
+{#    <div style="position: relative; text-align: center; margin-top: 100px;">#}
+{#        <div id="kaleidoscope" class="kaleidoscope">#}
+{#            <div class="milk-background">#}
+{#                <img class="milk-background" src="/images/milk.png" alt="">#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#<div id="people_container"#}
+{#     style="position: relative; text-align: center; margin-top: 60px;" hidden>#}
+{#</div>#}
+
+{% endblock %}
+

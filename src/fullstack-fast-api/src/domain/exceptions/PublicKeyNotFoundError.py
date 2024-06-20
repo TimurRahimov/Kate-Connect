@@ -1,0 +1,2 @@
+class PublicKeyNotFoundError(Exception):
+    pass

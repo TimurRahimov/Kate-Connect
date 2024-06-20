@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/kaleidoscope-items.css" rel="stylesheet">
+    <link href="/css/fonts.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/icon.ico">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>{{ title }}</title>
+    <style>
+
+        .text-white {
+            font-family: serif;
+            font-size: 22px !important;
+            font-weight: 600;
+            text-shadow: 0 -1px 10px #bcb4ff;
+        }
+
+        .text-secondary {
+            font-family: serif;
+            font-size: 22px !important;
+            font-weight: 600;
+        }
+
+        input.people-finder {
+            text-align: center;
+            font-size: 18px;
+            height: 50px;
+            background-color: rgb(20 20 20);
+            box-shadow: 0 .15rem 1rem rgba(50, 50, 50, .15) !important;
+            color: rgb(255 255 255);
+            border-bottom: 1px solid #6c757d;
+        }
+
+        div.people-finder {
+            position: relative;
+            top: 0;
+            z-index: 0;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body{% if user %} user_id="{{ user.user_id }}" {% endif %}>
+
+{% set navbar = [
+('Главная', '/', 'bx bxs-home'),
+('Люди', '/people/', 'bx bx-world'),
+('Сообщения', '#', 'bx bxs-message-rounded'),
+('О сайте', '#', 'bx bx-code-alt')] %}
+
+<header>
+    <div class="container">
+        <div class="header-container d-flex flex-wrap align-items-center justify-content-between">
+            <div class="header-up-mobile">
+
+                <a href="/" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
+                    {#                    <img src="/images/favicon.ico" alt="Kate Connect" height="40px">#}
+{#                    <h4 class="pc-header-logo-name">KateConnect</h4>#}
+{#                    <h4 class="mobile-header-logo-name">KateConnect</h4>#}
+                    <h4 class="header-logo-name">KateConnect</h4>
+                </a>
+
+                {% if user %}
+                    <div class="btn-group nav col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 mx-5 mobile-menu">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                   style="font-size: 21px; font-weight: 500">
+                                    Меню
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark"
+                                    aria-labelledby="navbarDarkDropdownMenuLink">
+                                    {% for nav in navbar %}
+                                        {% if nav[0] == title %}
+                                            <li><a href="{{ nav[1] }}" class=" nav-link px-2 text-white"
+                                                   style="font-size: 18px"><i class='{{ nav[2] }}'></i> {{ nav[0] }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li><a href="{{ nav[1] }}" class=" nav-link px-2 text-secondary"
+                                                   style="font-size: 18px"><i class='{{ nav[2] }}'></i> {{ nav[0] }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="pc-menu">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 mx-5">
+                    {% if user %}
+                        {% for nav in navbar %}
+                            {% if nav[0] == title %}
+                                <li><a href="{{ nav[1] }}" class="nav-link px-2 text-white"
+                                       style="font-size: 18px">{{ nav[0] }}</a></li>
+                            {% else %}
+                                <li><a href="{{ nav[1] }}" class="nav-link px-2 text-secondary"
+                                       style="font-size: 18px">{{ nav[0] }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+
+            {% if user %}
+                <div class="text-end">
+                    <ul class="nav col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 mx-5 user-header">
+                        <li class="notification-button">
+                            <button type="button" class="btn me-2 "
+                                    data-bs-toggle="dropdown"
+                                    style="display: flex">
+                                <i class='bx bxs-bell' style="font-size: 21px">
+                                </i>
+                                <span class="notification-container">
+                                    <span id="notification-count" hidden>
+                                        -
+                                    </span>
+                                </span>
+                            </button>
+
+                            <div class="container">
+                                <ul class="dropdown-menu dropdown-menu-end
+                                dropdown-menu-dark notifications-ul scrollbar-primary"
+                                    aria-labelledby="navbarDarkDropdownMenuLink" id="notifications-ul">
+                                </ul>
+                            </div>
+
+                        </li>
+                        <li>
+                            <a href="/{{ user.user_id }}"
+                               class="d-flex align-items-center mb-lg-0 text-white text-decoration-none">
+                                <div class="avatar-in-top-bar">
+                                    <img src="{% if user.avatar_link %}{{ user.avatar_link }}
+                                          {% else %}/images/default_avatar.jpg {% endif %}"
+                                         height="40px" width="40px"
+                                         style=" border-radius:50%;" alt="avatar">
+                                </div>
+                                {#                                <h4 style="margin-top: 0;#}
+                                {#                                           margin-bottom: 0;#}
+                                {#                                           margin-right: 25px;#}
+                                {#                                           word-break: break-word;#}
+                                {#                                           text-align: left">{{ user.nickname }}</h4>#}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            {% else %}
+
+                <div class="text-end">
+                    <button id="reg_button" type="button" class="btn btn-outline-light me-2"
+                            onclick="window.location.href = '/login'"
+                            style="margin-right: 8px">
+                        Зарегистрироваться
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            onclick="window.location.href = '/login'"
+                            style="margin-right: 8px">
+                        Войти
+                    </button>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+<div class="people-finder container">
+    <label class="people-finder">
+        <i class="bx bx-search-alt-2 people-finder"></i>
+        <input class="modal-content rounded-4 shadow user-info-line people-finder" entity_type="users">
+    </label>
+</div>
+<div id="kaleidoscope_container"></div>
+<div id="people_container" style="position: relative; text-align: center; margin-top: 60px;" hidden="">
+</div>
+
+{% block content %}
+{% endblock %}
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-theme="dark">
+        <div class="toast-header">
+            {#            <img src="..." class="rounded me-2" alt="...">#}
+            <strong id="notification-top" class="me-auto" style="color: white; font-size: 18px">Bootstrap</strong>
+            {#            <small>11 мин назад</small>#}
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+        </div>
+        <div id="notification-body" class="toast-body" style="color: white; font-size: 16px; margin: 4px">
+            Привет, мир! Это тост-сообщение.
+        </div>
+    </div>
+</div>
+
+<template id="button_in_people_tmpl">
+    <button type="button" class="btn me-2 button-in-people-buttons"
+            onclick_type=""
+            friend_id="">
+    </button>
+</template>
+
+<template id="user_in_people_tmpl">
+    <div class="modal-content rounded-4 shadow user-info-line">
+        <a href="/" class="d-flex align-items-center text-decoration-none"
+           style="margin: 15px auto 15px 25px;">
+            <div class="avatar-in-people" user_id="">
+                <img src="/images/default_avatar.jpg"
+                     height="40px" width="40px"
+                     style=" border-radius:50%;">
+            </div>
+            <h4 style="margin-top: 0; margin-bottom: 0; margin-right: 25px; word-break: break-all;">
+            </h4>
+        </a>
+        <div class="user-in-people-buttons">
+        </div>
+        <br>
+    </div>
+</template>
+
+<script type="module" src="/js/script.js?q=111"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+</html>

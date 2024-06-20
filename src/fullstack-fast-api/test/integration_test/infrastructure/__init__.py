@@ -1,0 +1,1 @@
+from .test_di_startup import TestInfrastructureRegister

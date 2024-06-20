@@ -1,0 +1,13 @@
+{% extends "default_page.html"  %}
+
+{% set title = 'Тестовая страница' %}
+
+{% block content %}
+<div class="container">
+    <br><br><br>
+
+    <h1>Привет, {{ name }}!</h1>
+    <h3>{{ request.url }}</h3>
+
+</div>
+{% endblock %}

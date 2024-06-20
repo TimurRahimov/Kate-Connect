@@ -1,0 +1,27 @@
+{% extends "default_page.html"  %}
+
+{% set title = 'Люди' %}
+
+{% block content %}
+
+<div class="people-finder container">
+    <label class="people-finder">
+        <i class="bx bx-search-alt-2 people-finder"></i>
+        <input class="modal-content rounded-4 shadow people-finder" type="search" entity_type="users">
+    </label>
+</div>
+<div id="kaleidoscope_container">
+    <div style="position: relative; text-align: center; margin-top: 100px;">
+        <div id="kaleidoscope" class="kaleidoscope">
+            <div class="milk-background">
+                <img class="milk-background" src="/images/milk.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="people_container"
+     style="position: relative; text-align: center; margin-top: 60px;" hidden>
+</div>
+
+{% endblock %}
+

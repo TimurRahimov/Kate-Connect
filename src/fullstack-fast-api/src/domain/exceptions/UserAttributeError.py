@@ -1,0 +1,2 @@
+class UserAttributeError(Exception):
+    pass

@@ -1,0 +1,6 @@
+from .AuthenticationError import AuthenticationError
+from .CompanionsMessageError import CompanionsMessageError
+from .PublicKeyNotFoundError import PublicKeyNotFoundError
+from .UserAttributeError import UserAttributeError
+from .UserNotFoundError import UserNotFoundError
+from .UserWithThisNameExistsError import UserWithThisNameExistsError

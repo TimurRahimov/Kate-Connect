@@ -1,0 +1,2 @@
+class UserWithThisNameExistsError(Exception):
+    pass

@@ -1,0 +1,169 @@
+{% extends "default_page.html" %}
+
+{% set title = 'Настройки' %}
+
+
+{% block content %}
+
+    <!-- Edit Avatar Url Modal -->
+    <div class="modal fade" id="editAvatarUrlModal" tabindex="-1" aria-labelledby="editAvatarUrlModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editAvatarUrlModalLabel">Введите ссылку на новую аватарку</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit_avatar_form"
+                          onsubmit="set_avatar_url(document.getElementById('new_avatar_url').value)">
+                        <div class="mb-3">
+                            <label for="new_avatar_url" class="col-form-label">Ссылка:</label>
+                            <input type="url" class="form-control" id="new_avatar_url">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Отмена
+                    </button>
+                    <button form="edit_avatar_form" type="submit" class="btn btn-outline-primary">
+                        Изменить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Avatar Url Modal -->
+    <div class="modal fade" id="deleteAvatarUrlModal" tabindex="-1" aria-labelledby="deleteAvatarUrlModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAvatarUrlModalLabel">Вы действительно хотите удалить
+                        аватарку?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <form id="delete_avatar_form" onsubmit="set_avatar_url('')">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Отмена
+                        </button>
+                        <button type="submit" class="btn btn-outline-danger">
+                            Удалить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container" style="text-align: center; max-width: 800px;">
+
+        <br><br>
+        <h1 class="user_nickname">
+            Настройки
+        </h1>
+
+        {#    <div class="align-items-center mb-2 mb-lg-0 text-decoration-none">#}
+        {#        <div class="avatar-in-settings">#}
+        {#            {% if user.avatar_link %}#}
+        {#            <img src="{{ user.avatar_link }}"#}
+        {#                 height="200px"#}
+        {#                 style="border-radius:50%; margin-top: 4em;#}
+        {#                 {% if user.online %}#}
+        {#                 border: rgba(0,0,0,0) solid 4px; outline: fuchsia solid 6px;#}
+        {#                 {% endif %}">#}
+        {#            {% else %}#}
+        {#            <img src="/images/default_avatar.jpg"#}
+        {#                 height="200px"#}
+        {#                 style="border-radius:50%; margin-top: 4em;#}
+        {#                 {% if user.online %}#}
+        {#                 border: rgba(0,0,0,0) solid 4px; outline: fuchsia solid 6px;#}
+        {#                 {% endif %}">#}
+        {#            {% endif %}#}
+        {#            <div class="avatar-settings">#}
+        {#                <button type="button" class="btn btn-primary"#}
+        {#                        style="margin-top: 15px" onclick="window.location.href='/{{ user.user_id }}'">#}
+        {#                    Применить#}
+        {#                </button>#}
+        {#                <br>#}
+        {#                <button type="button" class="btn btn-outline-primary"#}
+        {#                        data-bs-toggle="modal" data-bs-target="#editAvatarUrlModal"> Изменить аватарку#}
+        {#                </button>#}
+        {#                <br>#}
+        {#                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"#}
+        {#                        data-bs-target="#deleteAvatarUrlModal">#}
+        {#                    Удалить аватарку#}
+        {#                </button>#}
+        {#                <br>#}
+        {#            </div>#}
+        {#        </div>#}
+        {#    </div>#}
+
+        {#        <br>#}
+        {#        <div class="modal-content rounded-4 shadow">#}
+        {#            <h3 style="word-break: break-all; margin: 18px">{{ user.user_id }}</h3>#}
+        {#        </div>#}
+
+        <br>
+        <div class="modal-content rounded-4 shadow user-info-line">
+            <h4 class="d-flex align-items-center text-decoration-none"
+                style="margin: 15px auto 15px 25px; word-break: break-all;">
+                Никнейм
+            </h4>
+            <div class="user-settings">
+                <input id="settings_nickname" class="button-in-people-buttons user-settings" value="{{ user.nickname }}" disabled>
+                <button type="button" class="btn btn-light me-2 button-in-people-buttons"
+                        onclick_type="change" change_type="nickname" user_id="{{ user.user_id }}">
+                    Изменить
+                </button>
+            </div>
+            <br>
+        </div>
+        <br>
+        <div class="modal-content rounded-4 shadow user-info-line">
+            <h4 class="d-flex align-items-center text-decoration-none"
+                style="margin: 15px auto 15px 25px; word-break: break-all;">
+                Пароль
+            </h4>
+            <div class="user-settings">
+                <input id="settings_password" type="password" class="button-in-people-buttons user-settings" value="*****" disabled>
+                <button type="button" class="btn btn-light me-2 button-in-people-buttons"
+                        onclick_type="change" change_type="password" user_id="{{ user.user_id }}" disabled>
+                    Изменить
+                </button>
+            </div>
+            <br>
+        </div>
+        <br>
+        <div class="modal-content rounded-4 shadow user-info-line">
+            <h4 class="d-flex align-items-center text-decoration-none"
+                style="margin: 15px auto 15px 25px; word-break: break-all;">
+                Аватарка
+            </h4>
+            <div class="user-settings">
+                <input id="settings_avatar_link" class="button-in-people-buttons user-settings" value="{{ user.avatar_link }}" disabled>
+                <button type="button" class="btn btn-light me-2 button-in-people-buttons"
+                        onclick_type="change" change_type="avatar_link" user_id="{{ user.user_id }}">
+                    Изменить
+                </button>
+            </div>
+            <br>
+        </div>
+
+    </div>
+
+    {% if last_time_online %}
+        <script>
+            set_online("{{ last_time_online }}")
+        </script>
+    {% else %}}
+        <script>
+            set_online()
+        </script>
+    {% endif %}
+
+{% endblock %}

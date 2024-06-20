@@ -1,0 +1,51 @@
+{% extends "default_page.html"  %}
+
+{% set title = 'Авторизация' %}
+
+{% block content %}
+<div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog"
+     id="modalSignin">
+    <br>
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2">Привет! Войдите или зарегистрируйтесь</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="window.location.href = '/'"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-3"
+                           id="nickname" name="nickname"
+                           placeholder="name@example.com">
+                    <label for="nickname">Никнейм</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control rounded-3"
+                           id="hash_of_password" name="hash_of_password"
+                           placeholder="Password">
+                    <label for="hash_of_password">Пароль</label>
+                </div>
+
+                <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3"
+                        onclick_type="register">
+                    Зарегистрироваться
+                </button>
+                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
+                        onclick_type="login">
+                    Войти
+                </button>
+
+                <p class="text-body-secondary" style="font-size: 13px; text-align: center">
+                    <br>
+                    Нажимая кнопки "Зарегистрироваться" или "Войти" вы принимаете политику конфиденциальности и
+                    обязуетесь купить создателю сайта чокопай</p>
+            </div>
+        </div>
+    </div>
+
+    <br>
+</div>
+{% endblock %}
