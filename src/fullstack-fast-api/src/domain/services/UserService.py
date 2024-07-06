@@ -1,5 +1,6 @@
 from datetime import datetime
 from uuid import uuid4
+import bcrypt
 import random
 
 from src.domain.entities import PasswordEntity, UserEntity
@@ -56,12 +57,13 @@ class UserService(IUserService):
             online=(await self.get_online(user.user_id))[0]
         ) for user in all_users[:count]]
 
-    async def login(self, nickname: str, hash_of_password: str) -> UserModel:
+    async def login(self, nickname: str, password: str) -> UserModel:
         all_users_dict = await self.__user_repo.query_all()
         for user_id, user_entity in all_users_dict.items():
             if user_entity.nickname == nickname:
                 user_password = await self.__password_repo.query(user_id)
-                if user_password.hash_of_password == hash_of_password:
+                if user_password is not None and bcrypt.checkpw(password.encode(),
+                                                                user_password.hashed_password.encode()):
                     session = await self.__session_service.create_session(user_id)
                     user_entity.last_time_online = time_iso(session.last_activity)
                     await self.__user_repo.add(user_entity)
@@ -77,7 +79,7 @@ class UserService(IUserService):
                     raise AuthenticationError()
         raise UserNotFoundError()
 
-    async def register(self, nickname: str, hash_of_password: str) -> UserModel:
+    async def register(self, nickname: str, password: str) -> UserModel:
         all_users_dict = await self.__user_repo.query_all()
         for user_id, user_entity in all_users_dict.items():
             if user_entity.nickname == nickname:
@@ -85,9 +87,10 @@ class UserService(IUserService):
 
         user_id = uuid4().hex
         session = await self.__session_service.create_session(user_id)
+        hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
         user_entity = UserEntity(user_id=user_id, nickname=nickname, last_time_online=time_iso(session.last_activity))
-        password_entity = PasswordEntity(user_id=user_id, hash_of_password=hash_of_password)
+        password_entity = PasswordEntity(user_id=user_id, hashed_password=hashed_password)
 
         await self.__user_repo.add(user_entity)
         await self.__password_repo.add(password_entity)
@@ -133,6 +136,6 @@ class UserService(IUserService):
                             hash_of_password: str,
                             publickey: str):
         password = await self.__password_repo.query(user_id)
-        if password.hash_of_password != hash_of_password:
+        if password.hashed_password != hash_of_password:
             raise AuthenticationError
         await self.__publickey_repo.add(PublicKeyModel(user_id, publickey))

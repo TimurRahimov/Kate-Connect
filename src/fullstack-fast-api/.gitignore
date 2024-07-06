@@ -164,3 +164,5 @@ src/front/__sandbox__
 tests/
 src/__historical_trash__
 test/integration_test/infrastructure/etc
+/docs/.$*.bkp
+/docs/.$*.dtmp
