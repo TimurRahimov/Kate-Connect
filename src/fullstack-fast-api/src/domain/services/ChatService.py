@@ -17,7 +17,8 @@ class ChatService(IChatService):
 
     async def create_chat(self, session: SessionModel, members_id: list[str], chat_type: ChatType,
                           title: str = None, avatar_url: str = "") -> ChatModel | None:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             return
 
         if session.user_id in members_id:
@@ -78,7 +79,8 @@ class ChatService(IChatService):
         )
 
     async def get_chat(self, session: SessionModel, chat_id: str) -> ChatModel | None:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             return
 
         chat_entity = await self.__chat_repo.query(chat_id)
@@ -105,7 +107,8 @@ class ChatService(IChatService):
         pass
 
     async def delete_chat(self, session: SessionModel, chat_id: str) -> bool:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             return False
 
         return await self.__chat_repo.delete(chat_id)

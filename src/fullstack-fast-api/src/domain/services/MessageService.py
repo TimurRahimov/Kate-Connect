@@ -62,7 +62,8 @@ class MessageService(IMessageService):
                            message_type: MessageType = MessageType.SIMPLE,
                            encodings: dict[str, str] = None,
                            attachments: list[AttachmentModel] = None) -> MessageModel | None:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             return
 
         chat_entity = await self.__chat_repo.query(chat_id)
@@ -122,7 +123,8 @@ class MessageService(IMessageService):
 
     async def get_message(self, session: SessionModel,
                           chat_id: str, message_id: str) -> MessageModel | None:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             return
 
         if session.user_id not in (await self.__chat_repo.query(chat_id)).members:
@@ -142,7 +144,8 @@ class MessageService(IMessageService):
         Если session.user_id = MessageModel.from_id И
         Если encoding уже существует, то меняем и edited = True
         """
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             return
 
         if session.user_id not in (await self.__chat_repo.query(chat_id)).members:
@@ -172,7 +175,8 @@ class MessageService(IMessageService):
         return await self.__to_model(message_entity, session)
 
     async def set_shown(self, session: SessionModel, chat_id: str, message_id: str) -> MessageModel | None:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             return
 
         if session.user_id not in (await self.__chat_repo.query(chat_id)).members:

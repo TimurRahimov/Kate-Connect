@@ -33,7 +33,8 @@ class NotificationService(INotificationService):
         await self.__notification_table.add(notification.user_id, notification_container)
 
     async def get_notifications(self, session: SessionModel) -> list[NotificationModel | None]:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             raise AuthenticationError()
 
         notification_container = await self.__notification_table.query(session.user_id)
@@ -55,7 +56,8 @@ class NotificationService(INotificationService):
         ]
 
     async def delete_notification(self, session: SessionModel, notification_id: str):
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             raise AuthenticationError()
 
         notification_container = await self.__notification_table.query(session.user_id)
@@ -64,7 +66,8 @@ class NotificationService(INotificationService):
             await self.__notification_table.add(session.user_id, notification_container)
 
     async def shown_notification(self, session: SessionModel, notification_id: str):
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             raise AuthenticationError()
 
         notification_container = await self.__notification_table.query(session.user_id)

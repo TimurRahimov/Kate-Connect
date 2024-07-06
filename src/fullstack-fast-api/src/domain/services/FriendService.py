@@ -18,7 +18,8 @@ class FriendService(IFriendService):
         self.__friend_table = kate_db.get_table('friends')
 
     async def add_friend(self, session: SessionModel, friend_id: str) -> bool:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             raise AuthenticationError()
 
         user = FriendEntity(user_id=session.user_id, friend_id=friend_id)
@@ -46,7 +47,8 @@ class FriendService(IFriendService):
         return True
 
     async def confirm_friend(self, session: SessionModel, friend_id: str) -> bool:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             raise AuthenticationError()
 
         user = await self.__friend_table.inner_table(session.user_id, FriendEntity).query(friend_id)
@@ -64,7 +66,8 @@ class FriendService(IFriendService):
         return True
 
     async def get_friends(self, session: SessionModel, user_id: str = None) -> list[FriendEntity | None]:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             raise AuthenticationError()
 
         if user_id is None:
@@ -78,7 +81,8 @@ class FriendService(IFriendService):
         return [f for f in friends]
 
     async def delete_friend(self, session: SessionModel, friend_id: str) -> bool:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             raise AuthenticationError()
 
         await self.__friend_table.inner_table(session.user_id, FriendEntity).delete(friend_id)

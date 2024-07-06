@@ -29,7 +29,8 @@ async def main_ws(websocket: WebSocket):
     if session.user_id is None or session.session_id is None:
         raise AuthenticationError()
 
-    if not await session_service.verify(session):
+    session = await session_service.verify(session)
+    if not session.confirmed:
         return
 
     await websocket.accept()
@@ -59,7 +60,8 @@ async def get_notifications_ws(websocket: WebSocket):
     session_service = ServiceContainer.get(ISessionService)
     notification_service = ServiceContainer.get(INotificationService)
 
-    if not await session_service.verify(session):
+    session = await session_service.verify(session)
+    if not session.confirmed:
         return
 
     await websocket.accept()
@@ -98,7 +100,8 @@ async def get_online_ws(websocket: WebSocket):
     session_service = ServiceContainer.get(ISessionService)
     user_service = ServiceContainer.get(IUserService)
 
-    if not await session_service.verify(session):
+    session = await session_service.verify(session)
+    if not session.confirmed:
         return
 
     await websocket.accept()

@@ -19,13 +19,11 @@ class UserService(IUserService):
                  session_service: ISessionService,
                  publickey_repo: IPublicKeyRepository,
                  user_repo: IUserRepository,
-                 password_repo: IPasswordRepository,
-                 session_repo: ISessionRepository):
+                 password_repo: IPasswordRepository):
         self.__session_service = session_service
         self.__publickey_repo = publickey_repo
         self.__user_repo = user_repo
         self.__password_repo = password_repo
-        self.__session_repo = session_repo
 
     async def get_user(self, user_id: str, session: SessionModel = None) -> UserModel:
         user = await self.__user_repo.query(user_id)
@@ -111,7 +109,8 @@ class UserService(IUserService):
             pass
 
     async def edit_user(self, session: SessionModel, param: str, value: str) -> bool:
-        if not await self.__session_service.verify(session):
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
             return False
 
         user = await self.__user_repo.query(session.user_id)
