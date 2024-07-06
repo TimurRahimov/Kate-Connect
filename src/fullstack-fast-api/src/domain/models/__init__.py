@@ -70,6 +70,23 @@ class SessionModel:
     user_id: str
     session_id: str
     last_activity: Optional[datetime] = None
+    confirmed: bool = False
+
+    def confirm(self) -> 'SessionModel':
+        return SessionModel(
+            user_id=self.user_id,
+            session_id=self.session_id,
+            last_activity=self.last_activity,
+            confirmed=True
+        )
+
+    def set_last_activity(self, last_activity: datetime):
+        return SessionModel(
+            user_id=self.user_id,
+            session_id=self.session_id,
+            last_activity=last_activity,
+            confirmed=self.confirmed
+        )
 
 
 @dataclass(frozen=True)
@@ -111,9 +128,9 @@ class PublicKeyModel:
 
 
 @dataclass(frozen=True)
-class HashOfPasswordModel:
+class PasswordModel:
     user_id: str
-    hash_of_password: str
+    password: str
 
 
 @dataclass(frozen=True)

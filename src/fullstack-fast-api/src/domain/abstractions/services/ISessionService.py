@@ -18,5 +18,5 @@ class ISessionService(ABC):
         pass
 
     @abstractmethod
-    async def verify(self, session: SessionModel) -> bool:
+    async def verify(self, session: SessionModel) -> SessionModel:
         pass

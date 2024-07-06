@@ -18,11 +18,11 @@ class IUserService(ABC):
         pass
 
     @abstractmethod
-    async def login(self, nickname: str, hash_of_password: str) -> UserModel:
+    async def login(self, nickname: str, password: str) -> UserModel:
         pass
 
     @abstractmethod
-    async def register(self, nickname: str, hash_of_password: str) -> UserModel:
+    async def register(self, nickname: str, password: str) -> UserModel:
         pass
 
     @abstractmethod

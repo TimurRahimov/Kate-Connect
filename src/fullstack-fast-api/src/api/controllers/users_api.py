@@ -31,7 +31,7 @@ async def register_user(nickname: str = Body(...),
                         hash_of_password: str = Body(...)) -> UserModel:
     user_service = ServiceContainer.get(IUserService)
     return await user_service.register(nickname=nickname,
-                                       hash_of_password=hash_of_password)
+                                       password=hash_of_password)
 
 
 @router_users_api.post("/api/v1/users/login")
@@ -39,7 +39,7 @@ async def login_user(nickname: str = Body(...),
                      hash_of_password: str = Body(...)) -> UserModel:
     user_service = ServiceContainer.get(IUserService)
     return await user_service.login(nickname=nickname,
-                                    hash_of_password=hash_of_password)
+                                    password=hash_of_password)
 
 
 @router_users_api.get("/api/v1/users/logout")

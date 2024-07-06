@@ -27,7 +27,8 @@ async def get_user(request: Request) -> UserModel | None:
 
     if "sessionId" in request.cookies:
         session = SessionModel(user_id=request.cookies["userId"], session_id=request.cookies["sessionId"])
-        if await session_service.verify(session):
+        session = await session_service.verify(session)
+        if session.confirmed:
             user = await user_repo.query(session.user_id)
 
             online = await user_service.get_online(user.user_id)

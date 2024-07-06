@@ -14,7 +14,7 @@ class UserEntity(BaseModel):
 
 class PasswordEntity(BaseModel):
     user_id: str
-    hash_of_password: str
+    hashed_password: str
 
 
 class SessionEntity(BaseModel):

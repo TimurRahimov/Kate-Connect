@@ -30,7 +30,9 @@ class SessionService(ISessionService):
         return SessionModel(
             user_id=user_id,
             session_id=session_id,
-            last_activity=iso_time(utcnow))
+            last_activity=iso_time(utcnow),
+            confirmed=True
+        )
 
     async def delete_session(self, session: SessionModel) -> bool:
         sessions_container = await self.__session_repo.query(session.user_id)
@@ -43,20 +45,17 @@ class SessionService(ISessionService):
     async def get_sessions(self, user_id: str) -> list[SessionModel] | None:
         pass
 
-    async def verify(self, session: SessionModel) -> bool:
-        user: UserEntity = await self.__user_repo.query(session.user_id)
-        if user is None:
-            return False
-        sessions_container = await self.__session_repo.query(user.user_id)
-        if sessions_container is None:
-            return False
-        for user_session in sessions_container.sessions.values():
-            if session.session_id == user_session.session_id:
-                utcnow = utcnow_iso()
-                user_session.last_activity = utcnow
-                user.last_time_online = utcnow
-                await self.__session_repo.add(sessions_container)
-                await self.__user_repo.add(user)
-                return True
+    async def verify(self, session: SessionModel) -> SessionModel:
+        if session.confirmed:
+            return session.set_last_activity(iso_time(utcnow_iso()))
 
-        return False
+        sessions_container = await self.__session_repo.query(session.user_id)
+        if sessions_container is not None:
+            for user_session in sessions_container.sessions.values():
+                if session.session_id == user_session.session_id:
+                    utcnow = utcnow_iso()
+                    user_session.last_activity = utcnow
+                    session = session.confirm().set_last_activity(iso_time(utcnow))
+                    await self.__session_repo.add(sessions_container)
+
+        return session
