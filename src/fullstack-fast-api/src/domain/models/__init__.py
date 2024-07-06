@@ -88,6 +88,7 @@ class SessionModel:
             confirmed=self.confirmed
         )
 
+
 @dataclass(frozen=True)
 class UserModel:
     user_id: str
@@ -127,9 +128,9 @@ class PublicKeyModel:
 
 
 @dataclass(frozen=True)
-class HashOfPasswordModel:
+class PasswordModel:
     user_id: str
-    hash_of_password: str
+    password: str
 
 
 @dataclass(frozen=True)

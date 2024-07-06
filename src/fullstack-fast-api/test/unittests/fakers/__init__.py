@@ -1,2 +1,4 @@
 from .PublicKeyModelFaker import PublicKeyModelFaker
-from .UserV1ModelFaker import UserV1ModelFaker
+from .UserModelFaker import UserModelFaker
+from .PasswordModelFaker import PasswordModelFaker
+from .SessionModelFaker import SessionModelFaker

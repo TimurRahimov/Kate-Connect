@@ -1,4 +1,70 @@
-# import pytest
+import bcrypt
+import pytest
+
+from src.domain.entities import PasswordEntity
+from src.utils.model_entity import user_m2e
+from test.unittests.fakers import UserModelFaker, PasswordModelFaker, SessionModelFaker
+from test.unittests.stubs import UserServiceStub
+
+
+@pytest.fixture
+def anyio_backend():
+    return 'asyncio'
+
+
+@pytest.mark.anyio
+async def test_register_with_hash_success():
+    # Arrange
+    user_service = UserServiceStub()
+    user = UserModelFaker().model
+    password = PasswordModelFaker(user_id=user.user_id).model.password
+
+    user_service.user_repo.query_all.return_value = {}
+    user_service.session_service.create_session.return_value = SessionModelFaker(user_id=user.user_id).model
+
+    # Act
+    await user_service.register(user.nickname, password)
+    hashed_password_to_add_in_repo = user_service.password_repo.add.call_args.args[0].hashed_password
+
+    # Assert
+    assert bcrypt.checkpw(
+        password.encode(),
+        hashed_password_to_add_in_repo.encode())
+
+
+@pytest.mark.anyio
+async def test_login_with_hash_success():
+    # Arrange
+    user_service = UserServiceStub()
+    user = UserModelFaker().model
+    password = PasswordModelFaker(user_id=user.user_id).model.password
+    hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+    user_service.user_repo.query_all.return_value = {user.user_id: user_m2e(user)}
+    user_service.password_repo.query.return_value = PasswordEntity(user_id=user.user_id,
+                                                                   hashed_password=hashed_password)
+    user_service.session_service.create_session.return_value = SessionModelFaker(user_id=user.user_id).model
+
+    # Act
+    logged_user = await user_service.login(user.nickname, password)
+
+    # Assert
+    assert logged_user is not None
+    assert logged_user.user_id == user.user_id
+
+
+
+
+    # user_service.user_repo.add.assert_called_once_with
+    # user_service.user_repo.get_all.assert_called_once()
+    # user_service.user_repo.add.assert_called_once()
+    # user_service.publickey_repo.add.assert_not_called()
+    # user_service.publickey_repo.query.assert_not_called()
+    # assert len(logged_user.sessions) == 1
+    # assert logged_user.user_id is not None
+    # assert logged_user.last_time_online is not None
+    # assert logged_user.sessions[0].last_activity is not None
+#
 #
 # from src.domain.exceptions import AuthenticationError, UserNotFoundError, UserWithThisNameExistsError, \
 #     PublicKeyNotFoundError
@@ -6,31 +72,6 @@
 # from test.unittests.fakers import UserV1ModelFaker, PublicKeyModelFaker
 # from test.unittests.stubs import UserServiceStub
 #
-#
-# @pytest.fixture
-# def anyio_backend():
-#     return 'asyncio'
-#
-#
-# @pytest.mark.anyio
-# async def test_login_success():
-#     # Arrange
-#     user_service = UserServiceStub()
-#     user = UserV1ModelFaker().model
-#     user_service.user_repo.get_all.return_value = {user.user_id: user}
-#
-#     # Act
-#     logged_user = await user_service.login(user.nickname, user.hash_of_password)
-#
-#     # Assert
-#     user_service.user_repo.get_all.assert_called_once()
-#     user_service.user_repo.add.assert_called_once()
-#     user_service.publickey_repo.add.assert_not_called()
-#     user_service.publickey_repo.query.assert_not_called()
-#     assert len(logged_user.sessions) == 1
-#     assert logged_user.user_id is not None
-#     assert logged_user.last_time_online is not None
-#     assert logged_user.sessions[0].last_activity is not None
 #
 #
 # @pytest.mark.anyio

@@ -7,22 +7,21 @@ from src.utils.time import utcnow_iso, iso_time
 fake = Faker()
 
 
-class UserV1ModelFaker:
+class UserModelFaker:
 
     def __init__(self):
         user_id = uuid4().hex
         utcnow = utcnow_iso()
         self.__model = UserModel(
-            nickname=fake.name(),
             user_id=user_id,
-            last_time_online=iso_time(utcnow),
+            nickname=fake.name(),
+            avatar_link=fake.image_url(),
             session=SessionModel(
                 user_id=user_id,
                 session_id=uuid4().hex,
                 last_activity=iso_time(utcnow),
             ),
-            avatar_link=fake.image_url(),
-
+            last_time_online=iso_time(utcnow)
         )
 
     @property

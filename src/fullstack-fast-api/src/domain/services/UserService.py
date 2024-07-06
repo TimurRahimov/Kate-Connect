@@ -72,7 +72,7 @@ class UserService(IUserService):
                         avatar_link=user_entity.avatar_link,
                         session=session,
                         last_time_online=session.last_activity,
-                        online=(await self.get_online(user_entity.user_id))[0])
+                        online=True)
                 else:
                     raise AuthenticationError()
         raise UserNotFoundError()
