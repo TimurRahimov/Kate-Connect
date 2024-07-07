@@ -1,0 +1,62 @@
+{% extends "default_page.html"  %}
+
+{% if method == "login" %}
+    {% set title = 'Вход в Kate Connect' %}
+{% else %}
+    {% set title = 'Регистрация в Kate Connect' %}
+{% endif %}
+
+{% block content %}
+<div class="modal modal-sheet position-static d-block  p-4 py-md-5" tabindex="-1" role="dialog"
+     id="modalSignin">
+    <br>
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow" style="background-color: rgba(0,0,0,0);">
+            <div class="modal-header p-5 pb-4 border-bottom-0" style="align-self: center;">
+                <h1 class="fw-bold mb-0 fs-2" style="text-align: center;">
+                    {% if method == "login" %}
+                        Войти
+                    {% else %}
+                        Зарегистрироваться
+                    {% endif %}
+                </h1>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-3"
+                           id="login" name="login"
+                           placeholder="name@example.com">
+                    <label for="login" style="color: black">Никнейм</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control rounded-3"
+                           id="password" name="password"
+                           placeholder="Password">
+                    <label for="password" style="color: black">Пароль</label>
+                </div>
+
+                {% if method == "login" %}
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
+                        onclick_type="login">
+                    Войти
+                </button>
+                {% else %}
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
+                        onclick_type="register">
+                    Зарегистрироваться
+                </button>
+                {% endif %}
+
+                <p class="text-body-secondary" style="font-size: 13px; text-align: center; color: gray!important">
+                    <br>
+                    Нажимая кнопки "Зарегистрироваться" или "Войти" вы принимаете политику конфиденциальности и
+                    обязуетесь купить создателю сайта чокопай</p>
+            </div>
+        </div>
+    </div>
+
+    <br>
+</div>
+{% endblock %}
