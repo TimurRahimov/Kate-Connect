@@ -60,7 +60,17 @@ async def login_page(request: Request):
     if user is not None:
         return RedirectResponse("/", status_code=302)
 
-    return templates.TemplateResponse("login.html", {"request": request, "user": None})
+    return templates.TemplateResponse("auth.html", {"request": request, "user": None, "method": "login"})
+
+
+@router_front.get("/register", response_class=HTMLResponse)
+async def login_page(request: Request):
+    user = await get_user(request)
+
+    if user is not None:
+        return RedirectResponse("/", status_code=302)
+
+    return templates.TemplateResponse("auth.html", {"request": request, "user": None, "method": "register"})
 
 
 @router_front.get("/people", response_class=HTMLResponse)
