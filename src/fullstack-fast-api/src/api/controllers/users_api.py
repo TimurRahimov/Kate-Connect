@@ -28,18 +28,18 @@ async def set_public_key(user_id: str,
 
 @router_users_api.post("/api/v1/users/register")
 async def register_user(nickname: str = Body(...),
-                        hash_of_password: str = Body(...)) -> UserModel:
+                        password: str = Body(...)) -> UserModel:
     user_service = ServiceContainer.get(IUserService)
     return await user_service.register(nickname=nickname,
-                                       password=hash_of_password)
+                                       password=password)
 
 
 @router_users_api.post("/api/v1/users/login")
 async def login_user(nickname: str = Body(...),
-                     hash_of_password: str = Body(...)) -> UserModel:
+                     password: str = Body(...)) -> UserModel:
     user_service = ServiceContainer.get(IUserService)
     return await user_service.login(nickname=nickname,
-                                    password=hash_of_password)
+                                    password=password)
 
 
 @router_users_api.get("/api/v1/users/logout")
