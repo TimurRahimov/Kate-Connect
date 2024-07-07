@@ -1,2 +1,0 @@
-class UserWithThisNameExistsError(Exception):
-    pass

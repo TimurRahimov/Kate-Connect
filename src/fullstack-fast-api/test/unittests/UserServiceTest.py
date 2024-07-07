@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 import bcrypt
 import pytest
 
@@ -36,17 +38,18 @@ async def test_register_with_hash_success():
 async def test_login_with_hash_success():
     # Arrange
     user_service = UserServiceStub()
+    login = uuid4().hex
     user = UserModelFaker().model
     password = PasswordModelFaker(user_id=user.user_id).model.password
     hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
-    user_service.user_repo.query_all.return_value = {user.user_id: user_m2e(user)}
+    user_service.user_repo.query_all.return_value = {user.user_id: user_m2e(user, login)}
     user_service.password_repo.query.return_value = PasswordEntity(user_id=user.user_id,
                                                                    hashed_password=hashed_password)
     user_service.session_service.create_session.return_value = SessionModelFaker(user_id=user.user_id).model
 
     # Act
-    logged_user = await user_service.login(user.nickname, password)
+    logged_user = await user_service.login(login, password)
 
     # Assert
     assert logged_user is not None

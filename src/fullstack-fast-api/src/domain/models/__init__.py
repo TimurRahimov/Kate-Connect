@@ -70,6 +70,7 @@ class SessionModel:
     user_id: str
     session_id: str
     last_activity: Optional[datetime] = None
+    expires: Optional[int] = None
     confirmed: bool = False
 
     def confirm(self) -> 'SessionModel':
@@ -77,6 +78,7 @@ class SessionModel:
             user_id=self.user_id,
             session_id=self.session_id,
             last_activity=self.last_activity,
+            expires=self.expires,
             confirmed=True
         )
 
@@ -85,14 +87,43 @@ class SessionModel:
             user_id=self.user_id,
             session_id=self.session_id,
             last_activity=last_activity,
+            expires=self.expires,
             confirmed=self.confirmed
         )
+
+    def to_dict(self):
+        return {
+            'user_id': self.user_id,
+            'session_id': self.session_id,
+            'last_activity': time_iso(self.last_activity),
+            'expires': self.expires,
+            'confirmed': self.confirmed
+        }
+
+
+@dataclass(frozen=True)
+class AuthModel:
+    user_id: str
+    login: str
+    session: SessionModel
+    nickname: str = ""
+    avatar_link: str = ""
+
+    def to_dict(self):
+        return {
+            'user_id': self.user_id,
+            'login': self.login,
+            'session': self.session.to_dict(),
+            'nickname': self.nickname,
+            'avatar_link': self.avatar_link
+        }
 
 
 @dataclass(frozen=True)
 class UserModel:
     user_id: str
-    nickname: str
+    # login: str
+    nickname: str = ""
     avatar_link: str = ""
     session: Optional[SessionModel] = None
     last_time_online: Optional[datetime] = None
@@ -103,6 +134,7 @@ class UserModel:
     def from_dict(cls, _dict: dict):
         return cls(
             user_id=_dict['user_id'],
+            # login=_dict['login'],
             nickname=_dict['nickname'],
             avatar_link=_dict['avatar_link'],
             last_time_online=iso_time(_dict['last_time_online']),
@@ -113,6 +145,7 @@ class UserModel:
     def to_dict(self):
         return {
             'user_id': self.user_id,
+            # 'login': self.login,
             'nickname': self.nickname,
             'avatar_link': self.avatar_link,
             'last_time_online': time_iso(self.last_time_online),

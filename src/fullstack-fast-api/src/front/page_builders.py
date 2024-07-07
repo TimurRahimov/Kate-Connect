@@ -149,9 +149,14 @@ async def user_page(request: Request, user_id: str):
     except UserNotFoundError:
         return await error_404_page(request)
 
+    login = None
+    if user and page_user.user_id == page_user.user_id:
+        login = await user_service.get_login(user.session)
+
     return templates.TemplateResponse("user_page.html", {"request": request, "user": user,
                                                          "page_user": page_user,
-                                                         "last_time_online": page_user.last_time_online})
+                                                         "last_time_online": page_user.last_time_online,
+                                                         "login": login})
 
 
 @router_front.get("/{user_id}/public_key", response_class=HTMLResponse)

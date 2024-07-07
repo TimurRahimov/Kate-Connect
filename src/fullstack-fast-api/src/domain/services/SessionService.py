@@ -2,7 +2,7 @@ from uuid import uuid4
 
 from src.domain.abstractions.repositories import ISessionRepository, IUserRepository
 from src.domain.abstractions.services import ISessionService
-from src.domain.entities import UserEntity, SessionEntity, SessionEntityContainer
+from src.domain.entities import SessionEntity, SessionEntityContainer
 from src.domain.models import SessionModel
 from src.utils.time import utcnow_iso, iso_time
 
@@ -17,10 +17,13 @@ class SessionService(ISessionService):
     async def create_session(self, user_id: str) -> SessionModel | None:
         session_id = uuid4().hex
         utcnow = utcnow_iso()
+        expires = 2678400
         session_entity = SessionEntity(
             user_id=user_id,
             session_id=session_id,
-            last_activity=utcnow)
+            last_activity=utcnow,
+            expires=expires
+        )
         sessions_container = await self.__session_repo.query(user_id)
         if sessions_container is None:
             sessions_container = SessionEntityContainer(user_id=user_id, sessions={})
@@ -31,6 +34,7 @@ class SessionService(ISessionService):
             user_id=user_id,
             session_id=session_id,
             last_activity=iso_time(utcnow),
+            expires=expires,
             confirmed=True
         )
 

@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 
 from src.domain.exceptions import (AuthenticationError,
                                    PublicKeyNotFoundError,
-                                   UserNotFoundError, CompanionsMessageError, UserWithThisNameExistsError)
+                                   UserNotFoundError, CompanionsMessageError, UserWithThisLoginExistsError)
 from src.front import error_404_page, error_500_page
 
 
@@ -48,12 +48,12 @@ async def companion_msg_error_handler(request: Request,
     )
 
 
-async def user_with_name_exists_error_handler(request: Request,
-                                              exc: UserWithThisNameExistsError):
+async def user_with_this_login_exists_error_handler(request: Request,
+                                                    exc: UserWithThisLoginExistsError):
     return JSONResponse(
         status_code=400,
         content={
-            "message": "Пользователь с таким именем уже существует"
+            "message": "Пользователь с таким логином уже существует"
         }
     )
 

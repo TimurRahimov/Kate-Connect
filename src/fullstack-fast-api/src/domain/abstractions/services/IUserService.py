@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.domain.models import UserModel, SessionModel
+from src.domain.models import UserModel, SessionModel, AuthModel
 
 
 class IUserService(ABC):
@@ -18,11 +18,15 @@ class IUserService(ABC):
         pass
 
     @abstractmethod
-    async def login(self, nickname: str, password: str) -> UserModel:
+    async def get_login(self, session: SessionModel) -> str:
         pass
 
     @abstractmethod
-    async def register(self, nickname: str, password: str) -> UserModel:
+    async def login(self, login: str, password: str) -> AuthModel:
+        pass
+
+    @abstractmethod
+    async def register(self, login: str, password: str) -> UserModel:
         pass
 
     @abstractmethod

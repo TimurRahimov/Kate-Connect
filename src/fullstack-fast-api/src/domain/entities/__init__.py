@@ -7,7 +7,8 @@ from src.domain.models import NotificationType, ChatType, AttachmentType, Messag
 
 class UserEntity(BaseModel):
     user_id: str
-    nickname: str
+    login: str
+    nickname: str = ""
     avatar_link: str = ""
     last_time_online: Optional[str]
 
@@ -21,6 +22,7 @@ class SessionEntity(BaseModel):
     user_id: str
     session_id: str
     last_activity: Optional[str]
+    expires: Optional[str]
 
 
 class SessionEntityContainer(BaseModel):
