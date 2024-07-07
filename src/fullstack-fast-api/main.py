@@ -5,10 +5,10 @@ import uvicorn
 from fastapi import FastAPI
 from src.api.exceptions_handlers import (authentication_error_handler, user_not_found_error_handler,
                                          pk_not_found_error_handler, companion_msg_error_handler,
-                                         user_with_name_exists_error_handler, page_not_found, internal_server_error)
+                                         user_with_this_login_exists_error_handler, page_not_found, internal_server_error)
 from src.api.web_sockets.v1 import router_ws_v1
 from src.domain.exceptions import (AuthenticationError, UserNotFoundError, PublicKeyNotFoundError,
-                                   CompanionsMessageError, UserWithThisNameExistsError)
+                                   CompanionsMessageError, UserWithThisLoginExistsError)
 from src.front.file_accessers import router_files
 
 from src.infrastructure import InfrastructureRegister
@@ -39,7 +39,7 @@ app.add_exception_handler(AuthenticationError, authentication_error_handler)
 app.add_exception_handler(PublicKeyNotFoundError, pk_not_found_error_handler)
 app.add_exception_handler(UserNotFoundError, user_not_found_error_handler)
 app.add_exception_handler(CompanionsMessageError, companion_msg_error_handler)
-app.add_exception_handler(UserWithThisNameExistsError, user_with_name_exists_error_handler)
+app.add_exception_handler(UserWithThisLoginExistsError, user_with_this_login_exists_error_handler)
 app.add_exception_handler(404, page_not_found)
 app.add_exception_handler(500, internal_server_error)
 

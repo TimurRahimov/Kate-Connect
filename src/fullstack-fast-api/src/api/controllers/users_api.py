@@ -3,7 +3,7 @@ from fastapi.responses import RedirectResponse
 
 from src.dependency_injection import ServiceContainer
 from src.domain.abstractions.services import (IUserService, IFriendService)
-from src.domain.models import UserModel, FriendModel
+from src.domain.models import UserModel, FriendModel, AuthModel
 from src.utils.session import get_session_from_request
 
 router_users_api = APIRouter()
@@ -27,18 +27,18 @@ async def set_public_key(user_id: str,
 
 
 @router_users_api.post("/api/v1/users/register")
-async def register_user(nickname: str = Body(...),
-                        password: str = Body(...)) -> UserModel:
+async def register_user(login: str = Body(...),
+                        password: str = Body(...)) -> AuthModel:
     user_service = ServiceContainer.get(IUserService)
-    return await user_service.register(nickname=nickname,
+    return await user_service.register(login=login,
                                        password=password)
 
 
 @router_users_api.post("/api/v1/users/login")
-async def login_user(nickname: str = Body(...),
-                     password: str = Body(...)) -> UserModel:
+async def login_user(login: str = Body(...),
+                     password: str = Body(...)) -> AuthModel:
     user_service = ServiceContainer.get(IUserService)
-    return await user_service.login(nickname=nickname,
+    return await user_service.login(login=login,
                                     password=password)
 
 

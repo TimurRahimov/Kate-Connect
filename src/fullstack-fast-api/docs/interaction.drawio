@@ -1,0 +1,113 @@
+<mxfile host="Electron" modified="2024-07-07T19:27:46.006Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.15 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="6uU9asxcV-imA3gheUH4" version="22.1.15" type="device">
+  <diagram name="Страница — 1" id="Hi3ajWIMIS8MR4Pr8RoZ">
+    <mxGraphModel dx="1434" dy="836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-1" target="Bp5M_iVDlmdlYIQlBRLn-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-1" value="SessionModel" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="1">
+          <mxGeometry x="553" y="480" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-2" value="+ Идентификатор П-ля (user_id)&lt;br&gt;+ Идентификатор С-сии (session_id)&lt;br&gt;+ Последняя активность (last_activity)&lt;br&gt;+ Срок действия (expires)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="Bp5M_iVDlmdlYIQlBRLn-1">
+          <mxGeometry y="40" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-5" target="Bp5M_iVDlmdlYIQlBRLn-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-5" value="UserService.register&lt;br&gt;(login, password)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="568" y="355" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-6" value="Регистрация Пользователя" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="Bp5M_iVDlmdlYIQlBRLn-5">
+          <mxGeometry y="40" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-10" value="UserEntity" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="1">
+          <mxGeometry x="840" y="330" width="150" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-11" value="+ user_id&lt;br&gt;+ login&lt;br&gt;+ nickname&lt;br&gt;+ avatar_link&lt;br&gt;+ last_time_online" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="Bp5M_iVDlmdlYIQlBRLn-10">
+          <mxGeometry y="40" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-6" target="Bp5M_iVDlmdlYIQlBRLn-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-26" value="SessionEntity" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="1">
+          <mxGeometry x="840" y="620" width="150" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-27" value="+ user_id&lt;br&gt;+ session_id&lt;br&gt;+ last_activity&lt;br&gt;+ expires&lt;br&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="Bp5M_iVDlmdlYIQlBRLn-26">
+          <mxGeometry y="40" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-30" target="Bp5M_iVDlmdlYIQlBRLn-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-30" value="UserRepository" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="367" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-32" value="SessionRepository" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="655" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-27" target="Bp5M_iVDlmdlYIQlBRLn-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-27" target="Bp5M_iVDlmdlYIQlBRLn-36">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="700" />
+              <mxPoint x="830" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-35" target="Bp5M_iVDlmdlYIQlBRLn-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-35" value="SessionService.create_session&lt;br&gt;(user_id)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="568" y="640" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-36" value="Создание сессии Пользователя" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="Bp5M_iVDlmdlYIQlBRLn-35">
+          <mxGeometry y="40" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-40" value="AuthModel" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="1">
+          <mxGeometry x="290" y="290" width="230" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-41" value="+ Идентификатор П-ля (user_id)&lt;br&gt;+ Логин П-ля (login)&lt;br&gt;+ Никнейм П-ля (nickname)&lt;br&gt;+ Ссылка на Ав-ку (avatar_link)&lt;br&gt;+ Сессия (session)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="Bp5M_iVDlmdlYIQlBRLn-40">
+          <mxGeometry y="40" width="230" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-42" value="API /register&lt;br style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;{login, password}&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" vertex="1" parent="1">
+          <mxGeometry x="20" y="400" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-44" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-5" target="Bp5M_iVDlmdlYIQlBRLn-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-41" target="Bp5M_iVDlmdlYIQlBRLn-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-46" value="API /login&lt;br style=&quot;font-size: 14px;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;{login, password}&lt;/span&gt;" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" vertex="1" parent="1">
+          <mxGeometry x="20" y="280" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-47" value="UserService.login&lt;br&gt;(login, password)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="568" y="275" width="200" height="80" as="geometry">
+            <mxRectangle x="568" y="790" width="150" height="50" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-48" value="Аутентификация Пользователя" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="Bp5M_iVDlmdlYIQlBRLn-47">
+          <mxGeometry y="40" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-49" value="PasswordEntity" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="1">
+          <mxGeometry x="840" y="170" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-50" value="+ user_id&lt;br&gt;+ hashed_password" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="Bp5M_iVDlmdlYIQlBRLn-49">
+          <mxGeometry y="40" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-52" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-51" target="Bp5M_iVDlmdlYIQlBRLn-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-51" value="PasswordRepository" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;fillColor=#a0522d;fontColor=#ffffff;strokeColor=#6D1F00;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="210" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Bp5M_iVDlmdlYIQlBRLn-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Bp5M_iVDlmdlYIQlBRLn-41" target="Bp5M_iVDlmdlYIQlBRLn-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

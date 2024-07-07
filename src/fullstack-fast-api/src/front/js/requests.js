@@ -169,11 +169,11 @@ export async function get_random_people(count) {
 }
 
 export async function auth(method) {
-    let nickname = document.getElementById("nickname").value
-    let password = document.getElementById("hash_of_password").value
+    let login = document.getElementById("login").value
+    let password = document.getElementById("password").value
 
     let user = {
-        nickname: nickname,
+        login: login,
         password: password
     }
     let url;
@@ -197,8 +197,19 @@ export async function auth(method) {
         let current_user = JSON.parse(await response.text())
         let session_id = current_user['session']['session_id']
 
-        document.cookie = "userId=" + current_user['user_id'] + ";max-age=2678400;path=/;"
-        document.cookie = "sessionId=" + session_id + ";max-age=2678400;path=/;"
+        let user_id_cookie = "userId=" + current_user['user_id'] + ";"
+        let session_id_cookie = "sessionId=" + session_id + ";"
+
+        if (current_user['session']['expires'] !== null) {
+            user_id_cookie += ("max-age=" + current_user['session']['expires'] + ";path=/;")
+            session_id_cookie += ("max-age=" + current_user['session']['expires'] + ";path=/;")
+        } else {
+            user_id_cookie += "max-age=2678400;path=/;"
+            session_id_cookie += "max-age=2678400;path=/;"
+        }
+
+        document.cookie = user_id_cookie
+        document.cookie = session_id_cookie
 
         await new Audio("/sounds/usb_in.wav").play()
         await new Promise(resolve => setTimeout(resolve, 1200))

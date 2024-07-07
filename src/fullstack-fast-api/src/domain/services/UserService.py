@@ -4,12 +4,11 @@ import bcrypt
 import random
 
 from src.domain.entities import PasswordEntity, UserEntity
-from src.domain.exceptions import (AuthenticationError, UserNotFoundError, UserWithThisNameExistsError,
+from src.domain.exceptions import (AuthenticationError, UserNotFoundError, UserWithThisLoginExistsError,
                                    PublicKeyNotFoundError)
 from src.domain.abstractions.services import IUserService, ISessionService
-from src.domain.abstractions.repositories import (IPublicKeyRepository, IUserRepository, IPasswordRepository,
-                                                  ISessionRepository)
-from src.domain.models import PublicKeyModel, UserModel, SessionModel
+from src.domain.abstractions.repositories import IPublicKeyRepository, IUserRepository, IPasswordRepository
+from src.domain.models import PublicKeyModel, UserModel, SessionModel, AuthModel
 from src.utils.time import iso_time, time_iso
 
 
@@ -55,10 +54,18 @@ class UserService(IUserService):
             online=(await self.get_online(user.user_id))[0]
         ) for user in all_users[:count]]
 
-    async def login(self, nickname: str, password: str) -> UserModel:
+    async def get_login(self, session: SessionModel) -> str:
+        session = await self.__session_service.verify(session)
+        if not session.confirmed:
+            return ""
+
+        user = await self.__user_repo.query(session.user_id)
+        return user.login
+
+    async def login(self, login: str, password: str) -> AuthModel:
         all_users_dict = await self.__user_repo.query_all()
         for user_id, user_entity in all_users_dict.items():
-            if user_entity.nickname == nickname:
+            if user_entity.login == login:
                 user_password = await self.__password_repo.query(user_id)
                 if user_password is not None and bcrypt.checkpw(password.encode(),
                                                                 user_password.hashed_password.encode()):
@@ -66,39 +73,38 @@ class UserService(IUserService):
                     user_entity.last_time_online = time_iso(session.last_activity)
                     await self.__user_repo.add(user_entity)
 
-                    return UserModel(
+                    return AuthModel(
                         user_id=user_id,
-                        nickname=user_entity.nickname,
-                        avatar_link=user_entity.avatar_link,
+                        login=user_entity.login,
                         session=session,
-                        last_time_online=session.last_activity,
-                        online=True)
+                        nickname=user_entity.nickname,
+                        avatar_link=user_entity.avatar_link)
                 else:
                     raise AuthenticationError()
         raise UserNotFoundError()
 
-    async def register(self, nickname: str, password: str) -> UserModel:
+    async def register(self, login: str, password: str) -> AuthModel:
         all_users_dict = await self.__user_repo.query_all()
         for user_id, user_entity in all_users_dict.items():
-            if user_entity.nickname == nickname:
-                raise UserWithThisNameExistsError()
+            if user_entity.login == login:
+                raise UserWithThisLoginExistsError()
 
         user_id = uuid4().hex
         session = await self.__session_service.create_session(user_id)
         hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
-        user_entity = UserEntity(user_id=user_id, nickname=nickname, last_time_online=time_iso(session.last_activity))
+        user_entity = UserEntity(user_id=user_id, login=login, last_time_online=time_iso(session.last_activity))
         password_entity = PasswordEntity(user_id=user_id, hashed_password=hashed_password)
 
         await self.__user_repo.add(user_entity)
         await self.__password_repo.add(password_entity)
 
-        return UserModel(
+        return AuthModel(
             user_id=user_id,
-            nickname=nickname,
-            last_time_online=session.last_activity,
+            login=user_entity.login,
             session=session,
-            online=True)
+            nickname=user_entity.nickname,
+            avatar_link=user_entity.avatar_link)
 
     async def logout(self, session: SessionModel):
         try:

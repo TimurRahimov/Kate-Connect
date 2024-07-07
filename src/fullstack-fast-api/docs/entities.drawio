@@ -1,30 +1,41 @@
-<mxfile host="Electron" modified="2024-07-06T15:35:34.457Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.15 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="Qd1gNQyu8G4hGc6tQPyk" version="22.1.15" type="device">
+<mxfile host="Electron" modified="2024-07-07T19:32:09.130Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.15 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="wyALPLUdLxt9Segcch6n" version="22.1.15" type="device">
   <diagram name="Страница — 1" id="jalvZomBwcD69yPN_kqk">
-    <mxGraphModel dx="1656" dy="818" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1539" dy="827" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="CyBXBGic2hE4jjvCa_F8-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;" parent="1" source="CyBXBGic2hE4jjvCa_F8-27" target="CyBXBGic2hE4jjvCa_F8-41" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="CyBXBGic2hE4jjvCa_F8-27" value="Пользователь (User)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
-          <mxGeometry x="100" y="580" width="210" height="130" as="geometry" />
+        <mxCell id="KJqHns-qawEjMDrq-Txt-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CyBXBGic2hE4jjvCa_F8-27" target="KJqHns-qawEjMDrq-Txt-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="680" />
+              <mxPoint x="340" y="815" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="CyBXBGic2hE4jjvCa_F8-28" value="+ Идентификатор П-ля (user_id)&lt;br&gt;+ Логин (login)&lt;br&gt;+ Пароль (password)&lt;br&gt;+ Аватар (avatar_url)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="CyBXBGic2hE4jjvCa_F8-27" vertex="1">
-          <mxGeometry y="40" width="210" height="90" as="geometry" />
+        <mxCell id="CyBXBGic2hE4jjvCa_F8-27" value="UserModel" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+          <mxGeometry x="80" y="575" width="230" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="CyBXBGic2hE4jjvCa_F8-28" value="+ Идентификатор П-ля (user_id)&lt;br&gt;+ Никнейм (nickname)&lt;br&gt;+ Пароль (password)&lt;br&gt;+ Аватар (avatar_url)&lt;br&gt;+ Последняя активность (last_activity)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="CyBXBGic2hE4jjvCa_F8-27" vertex="1">
+          <mxGeometry y="40" width="230" height="100" as="geometry" />
         </mxCell>
         <mxCell id="CyBXBGic2hE4jjvCa_F8-36" value="Пароль (password)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
-          <mxGeometry x="384" y="750" width="230" height="110" as="geometry" />
+          <mxGeometry x="380" y="890" width="230" height="110" as="geometry" />
         </mxCell>
         <mxCell id="CyBXBGic2hE4jjvCa_F8-37" value="+ Хэш-пароля (hashed_password), &lt;br&gt;полученный с&amp;nbsp;помощью библиотеки &lt;br&gt;bcrypt. &lt;br&gt;В нём в начале хэша хранится соль" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="CyBXBGic2hE4jjvCa_F8-36" vertex="1">
           <mxGeometry y="40" width="230" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="CyBXBGic2hE4jjvCa_F8-39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;strokeWidth=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="CyBXBGic2hE4jjvCa_F8-28" target="CyBXBGic2hE4jjvCa_F8-37" edge="1">
+        <mxCell id="CyBXBGic2hE4jjvCa_F8-39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;strokeWidth=1;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="350" y="687" />
-              <mxPoint x="350" y="815" />
+              <mxPoint x="310" y="680" />
+              <mxPoint x="340" y="680" />
+              <mxPoint x="340" y="974" />
             </Array>
+            <mxPoint x="310" y="680" as="sourcePoint" />
+            <mxPoint x="380" y="973.9655172413793" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="CyBXBGic2hE4jjvCa_F8-40" value="Идентификатор Пользователя&lt;br&gt;(user_id)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
@@ -36,14 +47,14 @@
         <mxCell id="CyBXBGic2hE4jjvCa_F8-44" value="Логин (login)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
           <mxGeometry x="384" y="580" width="230" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="CyBXBGic2hE4jjvCa_F8-45" value="Строка, состоящая из символов,&amp;nbsp;&lt;br&gt;цифер и знака &quot;_&quot;.&lt;br&gt;Длина: от 5 символов до 32 (как в ТГ)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="CyBXBGic2hE4jjvCa_F8-44" vertex="1">
+        <mxCell id="CyBXBGic2hE4jjvCa_F8-45" value="Строка, состоящая из латинских &lt;br&gt;символов, цифер и знака &quot;_&quot;.&lt;br&gt;Длина: от 5 символов до 32 (как в ТГ)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="CyBXBGic2hE4jjvCa_F8-44" vertex="1">
           <mxGeometry y="40" width="230" height="90" as="geometry" />
         </mxCell>
         <mxCell id="CyBXBGic2hE4jjvCa_F8-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;startFill=0;" parent="1" source="CyBXBGic2hE4jjvCa_F8-28" target="CyBXBGic2hE4jjvCa_F8-45" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="CyBXBGic2hE4jjvCa_F8-48" value="Аватар (avatar_url)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
-          <mxGeometry x="90" y="750" width="230" height="110" as="geometry" />
+          <mxGeometry x="80" y="780" width="230" height="110" as="geometry" />
         </mxCell>
         <mxCell id="CyBXBGic2hE4jjvCa_F8-49" value="Ссылка на аватарку пользователя.&lt;br&gt;В перспективе П-ль должен грузить&amp;nbsp;&lt;br&gt;файл и на стороне KC должна&lt;br&gt;создаваться ссылка на этот файл" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="CyBXBGic2hE4jjvCa_F8-48" vertex="1">
           <mxGeometry y="40" width="230" height="70" as="geometry" />
@@ -54,7 +65,7 @@
         <mxCell id="DgBRq3_PrkJnsQy8nKH5-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="DgBRq3_PrkJnsQy8nKH5-1" target="DgBRq3_PrkJnsQy8nKH5-24" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="DgBRq3_PrkJnsQy8nKH5-1" value="П-льская Сессия (user_session)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
+        <mxCell id="DgBRq3_PrkJnsQy8nKH5-1" value="SessionModel" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="1" vertex="1">
           <mxGeometry x="80" y="320" width="230" height="130" as="geometry" />
         </mxCell>
         <mxCell id="DgBRq3_PrkJnsQy8nKH5-2" value="+ Идентификатор П-ля (user_id)&lt;br&gt;+ Идентификатор С-сии (session_id)&lt;br&gt;+ Последняя активность (last_activity)&lt;br&gt;+ Срок действия (expires)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="DgBRq3_PrkJnsQy8nKH5-1" vertex="1">
@@ -81,7 +92,7 @@
         <mxCell id="DgBRq3_PrkJnsQy8nKH5-18" value="Срок действия (expires)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
           <mxGeometry x="380" y="70" width="230" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="DgBRq3_PrkJnsQy8nKH5-19" value="Срок действия сессии в формате&lt;br&gt;ISO Date format" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="DgBRq3_PrkJnsQy8nKH5-18" vertex="1">
+        <mxCell id="DgBRq3_PrkJnsQy8nKH5-19" value="Срок действия сессии в секундах&lt;br&gt;(max-age)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="DgBRq3_PrkJnsQy8nKH5-18" vertex="1">
           <mxGeometry y="40" width="230" height="60" as="geometry" />
         </mxCell>
         <mxCell id="DgBRq3_PrkJnsQy8nKH5-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="DgBRq3_PrkJnsQy8nKH5-19" target="DgBRq3_PrkJnsQy8nKH5-9" edge="1">
@@ -96,7 +107,19 @@
         <mxCell id="DgBRq3_PrkJnsQy8nKH5-23" value="Идентификатор Сессии&lt;br&gt;(user_id)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
           <mxGeometry x="80" y="130" width="230" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="DgBRq3_PrkJnsQy8nKH5-24" value="Идентификатор Сессии &lt;br&gt;сгенерированный с помощью ???" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="DgBRq3_PrkJnsQy8nKH5-23" vertex="1">
+        <mxCell id="DgBRq3_PrkJnsQy8nKH5-24" value="Идентификатор Сессии &lt;br&gt;сгенерированный с помощью uuid4" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="DgBRq3_PrkJnsQy8nKH5-23" vertex="1">
+          <mxGeometry y="40" width="230" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="KJqHns-qawEjMDrq-Txt-1" value="Никнейм (nickname)" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="380" y="730" width="230" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="KJqHns-qawEjMDrq-Txt-2" value="Строка, состоящая из любых символов&lt;br&gt;Юникода&lt;br&gt;Длина: от 0 символов до 32 (как в ТГ)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="KJqHns-qawEjMDrq-Txt-1">
+          <mxGeometry y="40" width="230" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="KJqHns-qawEjMDrq-Txt-4" value="AuthModel" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="1">
+          <mxGeometry x="-240" y="440" width="230" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="KJqHns-qawEjMDrq-Txt-5" value="+ Идентификатор П-ля (user_id)&lt;br&gt;+ Логин П-ля (login)&lt;br&gt;+ Никнейм П-ля (nickname)&lt;br&gt;+ Ссылка на Ав-ку (avatar_link)&lt;br&gt;+ Сессия (session)" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="KJqHns-qawEjMDrq-Txt-4">
           <mxGeometry y="40" width="230" height="90" as="geometry" />
         </mxCell>
       </root>

@@ -3,9 +3,10 @@ from src.domain.models import UserModel, FriendModel, SessionModel
 from src.utils.time import iso_time, time_iso
 
 
-def user_m2e(user_model: UserModel) -> UserEntity:
+def user_m2e(user_model: UserModel, login: str) -> UserEntity:
     return UserEntity(
         user_id=user_model.user_id,
+        login=login,
         nickname=user_model.nickname,
         avatar_link=user_model.avatar_link,
         last_time_online=time_iso(user_model.last_time_online),
