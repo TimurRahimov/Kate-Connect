@@ -174,7 +174,7 @@ export async function auth(method) {
 
     let user = {
         nickname: nickname,
-        hash_of_password: password
+        password: password
     }
     let url;
 
