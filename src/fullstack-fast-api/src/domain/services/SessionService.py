@@ -17,7 +17,7 @@ class SessionService(ISessionService):
     async def create_session(self, user_id: str) -> SessionModel | None:
         session_id = uuid4().hex
         utcnow = utcnow_iso()
-        expires = 2678400
+        expires = str(2678400)
         session_entity = SessionEntity(
             user_id=user_id,
             session_id=session_id,

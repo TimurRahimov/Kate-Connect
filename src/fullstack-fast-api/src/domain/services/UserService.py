@@ -85,7 +85,7 @@ class UserService(IUserService):
 
     async def register(self, login: str, password: str) -> AuthModel:
         all_users_dict = await self.__user_repo.query_all()
-        for user_id, user_entity in all_users_dict.items():
+        for _, user_entity in all_users_dict.items():
             if user_entity.login == login:
                 raise UserWithThisLoginExistsError()
 
